@@ -8,7 +8,7 @@ const TodoList = ()=>{
     const [todos, setTodos] = useState([])
 
     const addTodo = (val)=>{
-        setTodos([...todos, {val ,id: uuid(), edit:false}])
+        setTodos([...todos, {val ,id: uuid(), edit:false, completed: false}])
     }
 
     const removeTodo = (id)=>{
@@ -18,25 +18,16 @@ const TodoList = ()=>{
 
     const editTodo = ({id, key, val})=>{     
         setTodos(todos.map( t => {
-            if(t.id === id){
-                const obj = {...t,edit:false,[key]:val}
-                console.log(obj)
-                return obj
-            }
+            if(t.id === id) return{...t,edit:false,[key]:val}
             return t
         }))
     }
 
     const getEditForm = (id)=>{
         setTodos( ( )=> todos.map( t => {
-            if(t.id === id){
-                const obj = {...t, edit:true}
-                console.log(obj)
-                return obj
-            }
+            if(t.id === id) return {...t, edit:true}
             return t
-        })
-        )
+        }))
     }
     return (
         <div className="TodoList">
@@ -44,7 +35,12 @@ const TodoList = ()=>{
             <NewTodoForm addTodo={addTodo}/>
             <div className="TodoList-Container">
                 {todos.map( t => t.edit ? <EditTodoForm val={t.val} key={t.id} id={t.id} editTodo={editTodo}/> : 
-                        <Todo item={t.val} key={t.id} id={t.id} removeTodo={removeTodo} getEditForm={getEditForm}/> 
+                        <Todo item={t.val} 
+                                key={t.id} id={t.id} 
+                                removeTodo={removeTodo} 
+                                getEditForm={getEditForm} 
+                                editTodo={editTodo} 
+                                completed={t.completed}/> 
                     
                 )}
             </div>

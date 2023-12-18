@@ -1,10 +1,15 @@
 import React from "react";
+import "./Todo.css"
 
-const Todo = ({item, id, removeTodo, getEditForm})=>(
-    <div className="Todo">
+const Todo = ({item, id, removeTodo, getEditForm, completed, editTodo})=>(
+    <div className={completed? "Todo completed": "Todo"}>
         {item}
         <button onClick={()=>removeTodo(id)}>x</button>
         <button onClick={()=>getEditForm(id)}>Edit</button>
+        {completed ? 
+            <button onClick={()=>editTodo({id,key:'completed', val:false})}>Mark as Incomplete</button> 
+            : <button onClick={()=>editTodo({id,key:'completed', val:true})}>Mark as Complete</button>}
+        
     </div>
 )
 

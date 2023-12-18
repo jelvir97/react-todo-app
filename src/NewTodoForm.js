@@ -12,6 +12,7 @@ const NewTodoForm = ({addTodo})=>{
         addTodo(formData)
         setFormData(()=>'')
     }
+    
     return (
         <form className="NewTodoForm">
             <label htmlFor="new-todo">New Todo</label>

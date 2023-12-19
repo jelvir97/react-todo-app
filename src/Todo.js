@@ -3,7 +3,7 @@ import "./Todo.css"
 
 const Todo = ({item, id, removeTodo, getEditForm, completed, editTodo})=>(
     <div className={completed? "Todo completed": "Todo"}>
-        {item}
+        <h4 className="Todo-Item">{item}</h4>
         <button onClick={()=>removeTodo(id)}>x</button>
         <button onClick={()=>getEditForm(id)}>Edit</button>
         {completed ? 
